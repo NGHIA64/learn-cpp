@@ -1,0 +1,52 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+bool check(string s);
+
+int main(){
+    ifstream finp;
+    finp.open("demtu.inp");
+    if (finp.fail()) {
+        cout << "Mo file khong thanh cong!";
+        return 0;
+    }
+    finp.ignore();// bo qua dong dau tien
+
+    string data;
+    int dem = 0;
+    while (!finp.eof()) {
+       /* if (finp.eof()) {
+            break;
+        }*/
+        finp >> data;
+        //cout << data << endl;
+        if (check(data) == true) {
+            dem++;
+        }
+    }
+    //cout << "So luong tu la: " << dem;
+    finp.close();
+
+    ofstream fout;
+    fout.open("demtu.out");
+    if (fout.fail()) {
+        cout << "Tao file khong thanh cong!";
+        return 0;
+    }
+
+    fout << dem;//ghi du lieu vao file
+    fout.close();
+
+    cout << "Mo file demtu.out de xem ket qua!";
+    return 0;
+}
+
+bool check(string s) {
+    if ((s[0] >= 'a' && s[0] <= 'z') || (s[0] >= 'A' && s[0] <= 'Z')) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
